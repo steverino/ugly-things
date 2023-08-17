@@ -11,6 +11,7 @@ body {
 }
 
 .header{
+    text-align: center;
     border: 1px solid #000;
     height: 2rem;
 }
@@ -29,8 +30,8 @@ body {
 
 .form-button {
     margin-top: 1rem;
- display: flex;
- justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .btn-submit{
