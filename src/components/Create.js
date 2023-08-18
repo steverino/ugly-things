@@ -5,27 +5,30 @@ import Images from "./Images";
 const Create = () => {
   const [title, setTitle] = useState("TITLE");
   const [description, setDescription] = useState("DESCRIPTION");
-  const [images, setImages] = useState('');
-  const [posts, setPosts] = useState([]);
+  const [images, setImages] = useState('IMAGES');
+  const [posts, setPosts] = useState();
 
   useEffect(() => {
-    axios.get("https://api.vschool.io/sfalvo/thing").then((response) => {
+    axios.get("https://api.vschool.io/sfalvo/thing/").then((response) => {
+      console.log(response.data);
       setPosts(response.data);
     });
   }, []);
 
   const postImage = () => {
     axios
-      .post("https://api.vschool.io/sfalvo/thing/", {
-        title: "title",
-        description: "description",
-        imgUrl: "picture",
+      .post("https://api.vschool.io/sfalvo/thing", {
+        title: title,
+        description: description,
+        imgUrl: images,
       })
       .then((response) => {
+        console.log(response);
         setPosts(response.data);
       })
-      .catch((error) => console.log(error.response.data));
+      .catch((error) => console.log(error));
   };
+if (!posts) return "No post!"
 
   const deletePost = (id) => {
     axios.delete(`https://api.vschool.io/sfalvo/thing/${id}`);
@@ -66,11 +69,21 @@ const Create = () => {
         </div>
         
       </form>
-      {console.log(Array.isArray(posts))}
+      {/* {console.log(Array.isArray(posts))} */}
       <ul>
         {posts.map((post, index) => {
           // return <li key={index}> <h3>{post.title}</h3> <p>{post.imgUrl}</p> {post.description}</li>;
-          console.log(Array.isArray(posts));
+          // console.log(Array.isArray(posts));
+          return ( 
+            <>
+            {post.title}
+            
+            <button className="btn-submit" type="button" onClick={()=>deletePost(post._id)}>
+            DELETE
+          </button>
+            </>
+            )
+          
         })}
       </ul>
     </>
