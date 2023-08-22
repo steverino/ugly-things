@@ -49,7 +49,7 @@ const Create = () => {
 
   return (
     <>
-      <form className="form">
+      {/* <form className="form"> */}
         <div className="form-input">
           <input
             type="text"
@@ -79,7 +79,7 @@ const Create = () => {
           </button>
           <img src="logo192.png" alt="" />
         </div>
-      </form>
+      {/* </form> */}
 
       <div id="deleteMessage">{deleteMsg}</div>
       {/* {console.log(Array.isArray(posts))} */}

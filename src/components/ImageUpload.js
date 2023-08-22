@@ -1,23 +1,35 @@
 import { useState } from "react";
-
+import axios from "axios";
 
 
 const ImageUpload = ({images}) => {
-    const [file, setFile] = useState();
-    const handleChange = (e) => {
-        console.log(e.target.files);
-        setFile(URL.createObjectURL(e.target.files[0]));
-    }
-    
-    return (
-        <>
-      <div>
-      <h2>Add Image:</h2>
-            <input type="file" onChange={handleChange} />
-            <img src={file} />
-      </div>
-    </>
+    const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('image', selectedFile);
+
+    axios.post('http://loaclhost:5000/upload', formData)
+      .then((response) => {
+        console.log('Image uploaded successfully');
+      })
+      .catch((error) => {
+        console.error('Error uploading image', error);
+      });
+  };
+
+  return (
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <input type="file" name="image" onChange={handleFileChange} />
+      <button type="submit">Upload</button>
+    </form>
   );
-}
+};
   
 export default ImageUpload;
