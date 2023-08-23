@@ -3,19 +3,21 @@ import axios from "axios";
 import ImageUpload from "./ImageUpload";
 
 
+
 const Create = () => {
   const [title, setTitle] = useState("TITLE");
   const [description, setDescription] = useState("DESCRIPTION");
-  const [images, setImages] = useState("IMAGES");
+  const [images, setImages] = useState('/backend/uploads');
   const [posts, setPosts] = useState([]);
   const [deleteMsg, setDeleteMsg] = useState("");
 
   const getImages = () => {
-    axios.get("https://api.vschool.io/sfalvo/thing").then((response) => {
+    axios.get("http://localhost:5000/uploads").then((response) => {
       setPosts(response.data);
     });
   };
 
+  
   useEffect(() => {
     getImages();
   }, []);
@@ -32,20 +34,22 @@ const Create = () => {
       })
       .catch((error) => console.log(error));
   };
-
+  
   const deletePost = (id) => {
     axios
       .delete(`https://api.vschool.io/sfalvo/thing/${id}`)
       .then((response) => {
         posts.filter((post) => {
-          setDeleteMsg(response.data.msg);
+          setDeleteMsg(response.data.msg + ' ' + post.title);
           setTimeout(() => {
             setDeleteMsg("");
           }, 3000);
           getImages();
+          return post
         });
       });
   };
+
 
   return (
     <>
@@ -77,7 +81,7 @@ const Create = () => {
           <button className="btn-submit" type="button" onClick={postImage}>
             Submit
           </button>
-          <img src="logo192.png" alt="" />
+          
         </div>
       {/* </form> */}
 
@@ -89,8 +93,8 @@ const Create = () => {
             // return <li key={index}> <h3>{post.title}</h3> <p>{post.imgUrl}</p> {post.description}</li>;
             // console.log(Array.isArray(posts));
             return (
-              <>
-                <li>
+              <React.Fragment key={post._id}>
+                <li >
                   <p> {post.title} </p>
                   <img src={post.imgUrl} alt="PIC" />
                   <p>{post.description}</p>
@@ -105,7 +109,7 @@ const Create = () => {
                     </button>
                   </div>
                 </li>
-              </>
+              </React.Fragment>
             );
           })}
         </ul>

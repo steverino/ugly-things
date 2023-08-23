@@ -8,16 +8,19 @@ const ImageUpload = ({images}) => {
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(event.target);
 
     const formData = new FormData();
+    
     formData.append('image', selectedFile);
-
-    axios.post('http://loaclhost:5000/upload', formData)
+    
+    axios.post('http://localhost:5000/uploads', formData)
       .then((response) => {
-        console.log('Image uploaded successfully');
+
+        console.log(response);
       })
       .catch((error) => {
         console.error('Error uploading image', error);
