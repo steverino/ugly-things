@@ -5,8 +5,7 @@ import ImageUpload from "./ImageUpload";
 
 
 const Create = () => {
-  const [title, setTitle] = useState("TITLE");
-  const [description, setDescription] = useState("DESCRIPTION");
+  
   const [images, setImages] = useState('/backend/uploads');
   const [posts, setPosts] = useState([]);
   const [deleteMsg, setDeleteMsg] = useState("");
@@ -25,9 +24,9 @@ const Create = () => {
   const postImage = () => {
     axios
       .post("https://api.vschool.io/sfalvo/thing", {
-        title: title,
-        description: description,
-        imgUrl: images,
+        // title: title,
+        // description: description,
+        // imgUrl: images,
       })
       .then((response) => {
         setPosts((prev) => [...prev, response.data]);
@@ -55,12 +54,7 @@ const Create = () => {
     <>
       {/* <form className="form"> */}
         <div className="form-input">
-          <input
-            type="text"
-            name="title"
-            placeholder="Title"
-            onChange={(e) => setTitle(e.target.value)}
-          />
+          
           {/* <input
             type="text"
             name="image"
@@ -68,52 +62,21 @@ const Create = () => {
             onChange={(e) => setImages(e.target.value)}
           /> */}
           <div>
-          <ImageUpload />
+          <ImageUpload postImage={postImage} />
           </div>
-          <input
-            type="text"
-            name="description"
-            placeholder="Description"
-            onChange={(e) => setDescription(e.target.value)}
-          />
+          
         </div>
         <div className="form-button">
-          <button className="btn-submit" type="button" onClick={postImage}>
+          {/* <button className="btn-submit" type="button" onClick={postImage}>
             Submit
-          </button>
+          </button> */}
           
         </div>
       {/* </form> */}
 
       <div id="deleteMessage">{deleteMsg}</div>
       {/* {console.log(Array.isArray(posts))} */}
-      <div className="container">
-        <ul>
-          {posts.map((post, index) => {
-            // return <li key={index}> <h3>{post.title}</h3> <p>{post.imgUrl}</p> {post.description}</li>;
-            // console.log(Array.isArray(posts));
-            return (
-              <React.Fragment key={post._id}>
-                <li >
-                  <p> {post.title} </p>
-                  <img src={post.imgUrl} alt="PIC" />
-                  <p>{post.description}</p>
-
-                  <div>
-                    <button
-                      className="btn-submit"
-                      type="button"
-                      onClick={() => deletePost(post._id)}
-                    >
-                      DELETE
-                    </button>
-                  </div>
-                </li>
-              </React.Fragment>
-            );
-          })}
-        </ul>
-      </div>
+      
     </>
   );
 };
