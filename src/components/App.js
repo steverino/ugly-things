@@ -2,6 +2,7 @@ import React from "react";
 import Create from "./Create";
 import Header from "./Header";
 import ImageUpload from "./ImageUpload";
+import UploadAndDisplayImage from "./UploadAndDisplayImage";
 
 
 const App = () => {
@@ -11,8 +12,8 @@ const baseURL = 'https://api.vschool.io/sfalvo/thing/'
     <>
       <div className="container">
         <Header/>
-        
-        <ImageUpload />
+        <Create/>
+        {/* <ImageUpload /> */}
       </div>
     </>
   );

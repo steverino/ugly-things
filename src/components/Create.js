@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ImageUpload from "./ImageUpload";
+import UploadAndDisplayImage from "./UploadAndDisplayImage";
 
 
 
 const Create = () => {
   
-  const [images, setImages] = useState('/backend/uploads');
   const [posts, setPosts] = useState([]);
   const [deleteMsg, setDeleteMsg] = useState("");
 
   const getImages = () => {
-    axios.get("http://localhost:5000/uploads").then((response) => {
+    axios.get("http://localhost:5000/build").then((response) => {
       setPosts(response.data);
+      console.log(response.data);  
     });
   };
 
@@ -21,18 +22,9 @@ const Create = () => {
     getImages();
   }, []);
 
-  const postImage = () => {
-    axios
-      .post("https://api.vschool.io/sfalvo/thing", {
-        // title: title,
-        // description: description,
-        // imgUrl: images,
-      })
-      .then((response) => {
-        setPosts((prev) => [...prev, response.data]);
-      })
-      .catch((error) => console.log(error));
-  };
+  const testFunction = () => {
+    console.log('FUNCTION CHECK');
+  }
   
   const deletePost = (id) => {
     axios
@@ -52,27 +44,19 @@ const Create = () => {
 
   return (
     <>
-      {/* <form className="form"> */}
+      
         <div className="form-input">
           
-          {/* <input
-            type="text"
-            name="image"
-            placeholder="Image"
-            onChange={(e) => setImages(e.target.value)}
-          /> */}
+          
           <div>
-          <ImageUpload postImage={postImage} />
+          <UploadAndDisplayImage testFunction={testFunction} />
           </div>
           
         </div>
-        <div className="form-button">
-          {/* <button className="btn-submit" type="button" onClick={postImage}>
-            Submit
-          </button> */}
-          
-        </div>
-      {/* </form> */}
+       <div>
+        {posts}
+       </div>
+      
 
       <div id="deleteMessage">{deleteMsg}</div>
       {/* {console.log(Array.isArray(posts))} */}
