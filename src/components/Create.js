@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ImageUpload from "./ImageUpload";
 import UploadAndDisplayImage from "./UploadAndDisplayImage";
-
+import data from '../assets/data.json'
 
 
 const Create = () => {
@@ -10,10 +10,13 @@ const Create = () => {
   const [posts, setPosts] = useState([]);
   const [deleteMsg, setDeleteMsg] = useState("");
 
+console.log('data '+data.myData);
+console.log(data.myData);
+
   const getImages = () => {
-    axios.get("http://localhost:5000/build").then((response) => {
-      setPosts(response.data);
-      console.log(response.data);  
+    axios.get("http://localhost:5000/uploads").then((response) => {
+      setPosts(response.data.myData);
+      // console.log(response.data.myData);  
     });
   };
 
@@ -21,10 +24,6 @@ const Create = () => {
   useEffect(() => {
     getImages();
   }, []);
-
-  const testFunction = () => {
-    console.log('FUNCTION CHECK');
-  }
   
   const deletePost = (id) => {
     axios
@@ -49,7 +48,7 @@ const Create = () => {
           
           
           <div>
-          <UploadAndDisplayImage testFunction={testFunction} />
+          <UploadAndDisplayImage />
           </div>
           
         </div>
