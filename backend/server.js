@@ -3,7 +3,6 @@ const multer = require("multer");
 const cors = require("cors");
 const fs = require('fs');
 const path = require('path');
-const { useState } = require("react");
 
 const corsOptions = {
   origin: "http://localhost:3000",
