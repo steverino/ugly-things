@@ -7,10 +7,14 @@ const Create = () => {
   const [images, setImages] = useState("IMAGES");
   const [posts, setPosts] = useState([]);
   
+  
+  const getImage=()=>{
+  axios.get("https://api.vschool.io/sfalvo/thing/").then((response) => {
+    setPosts(response.data);
+  });
+}
   useEffect(() => {
-    axios.get("https://api.vschool.io/sfalvo/thing/").then((response) => {
-      setPosts(response.data);
-    });
+    getImage()
   }, []);
   
 
@@ -33,7 +37,7 @@ const Create = () => {
     .then((response)=> {posts.filter((post)=> {
             
             setPosts((prev)=> [...prev, post.id !== id])
-          
+          getImage()
     })})
   };
 
