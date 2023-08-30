@@ -54,9 +54,9 @@ const Create = () => {
             // return <li key={index}> <h3>{post.title}</h3> <p>{post.imgUrl}</p> {post.description}</li>;
             // console.log(Array.isArray(posts));
             return (
-              <>
-                <li>
-                  <p> {post.title} </p>
+              
+                <li key={post._id}>
+                  <h2> {post.title} </h2>
                   <p className="imageDisplay"><img src={post.imgUrl} alt="PIC" /></p>
                   <p>{post.description}</p>
 
@@ -70,7 +70,7 @@ const Create = () => {
                     </button>
                   </div>
                 </li>
-              </>
+              
             );
           })}
         </ul>
