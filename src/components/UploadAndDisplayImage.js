@@ -1,5 +1,7 @@
 import React, { useState, createContext, useContext, useRef } from "react";
 import axios from "axios";
+import { UserContext } from "./Create";
+
 
 const UploadAndDisplayImage = ({ postImage }) => {
   // console.log(postImage);
@@ -10,6 +12,8 @@ const UploadAndDisplayImage = ({ postImage }) => {
   const [imgName, setImgName] = useState("");
   const [myObj, setMyObj] = useState({})
 
+  const myUser = useContext(UserContext)
+  
   const onFileUpload = () => {
     const formData = new FormData();
     formData.append("myFile", selectedFile);
@@ -21,25 +25,26 @@ const UploadAndDisplayImage = ({ postImage }) => {
     });
     makeFile(imgName,title,description);
   };
-
-const makeFile = (imgName,title,description)=>{
-  let imgUrl = `images/${imgName}`
-
-  postImage(imgUrl,title,description)
-}
-
+  
+  const makeFile = (imgName,title,description)=>{
+    let imgUrl = `images/${imgName}`
+    
+    postImage(imgUrl,title,description)
+  }
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     
   };
-const refTitle=useRef(null)
-const refDesc=useRef(null)
-const refImage=useRef(null)
+  const refTitle=useRef(null)
+  const refDesc=useRef(null)
+  const refImage=useRef(null)
   return (
     <>
       <div>
-        {/* {imgName} */}
+        {myUser}
         <h1>Upload and Display Image</h1>
+        
 
         {selectedFile && (
           <div>
@@ -48,7 +53,7 @@ const refImage=useRef(null)
               alt="not found"
               width={"250px"}
               src={URL.createObjectURL(selectedFile)}
-            />
+              />
             <div>{description}</div>
             <br />
             <button onClick={() => {
