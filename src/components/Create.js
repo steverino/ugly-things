@@ -3,11 +3,8 @@ import axios from "axios";
 import UploadAndDisplayImage from "./UploadAndDisplayImage";
 
 const Create = () => {
-  // const [title, setTitle] = useState("TITLE");
-  // const [description, setDescription] = useState("DESCRIPTION");
-  // const [images, setImages] = useState("IMAGES");
-  const [posts, setPosts] = useState([]);
   
+  const [posts, setPosts] = useState([]);
   
   const getImage=()=>{
   axios.get("https://api.vschool.io/sfalvo/thing/").then((response) => {
