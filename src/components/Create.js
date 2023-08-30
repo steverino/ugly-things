@@ -2,13 +2,13 @@ import React, { useState, useEffect, createContext, useContext } from "react";
 import axios from "axios";
 import UploadAndDisplayImage from "./UploadAndDisplayImage";
 
-export const UserContext = createContext()
+export const UserContext = createContext();
 const Create = () => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState("Jesse Hall");
 
-  const [postId, setPostId] = useState('')
-  
+  const [postId, setPostId] = useState("");
+
   const getImage = () => {
     axios.get("https://api.vschool.io/sfalvo/thing/").then((response) => {
       setPosts(response.data);
@@ -17,22 +17,22 @@ const Create = () => {
   useEffect(() => {
     getImage();
   }, []);
-  
+
   const postImage = (imgUrl, title, description) => {
     axios
-    .post("https://api.vschool.io/sfalvo/thing", {
-      title,
-      imgUrl,
+      .post("https://api.vschool.io/sfalvo/thing", {
+        title,
+        imgUrl,
         description,
       })
       .then((response) => {
         setPosts((prev) => [...prev, response.data]);
       })
       .catch((error) => console.log(error));
-    };
-    
-    const deletePost = (id) => {
-      axios
+  };
+
+  const deletePost = (id) => {
+    axios
       .delete(`https://api.vschool.io/sfalvo/thing/${id}`)
       .then((response) => {
         posts.filter((post) => {
@@ -40,12 +40,12 @@ const Create = () => {
           getImage();
         });
       });
-    };
-    
-    return (
-      <>
+  };
+
+  return (
+    <>
       <UserContext.Provider value={user}>
-      <UploadAndDisplayImage postImage={postImage} />
+        <UploadAndDisplayImage postImage={postImage} />
       </UserContext.Provider>
       {/* {console.log(Array.isArray(posts))} */}
       <div className="container">
@@ -53,7 +53,7 @@ const Create = () => {
           {posts.map((post, index) => {
             // return <li key={index}> <h3>{post.title}</h3> <p>{post.imgUrl}</p> {post.description}</li>;
             // console.log(Array.isArray(posts));
-            
+
             return (
               <li key={post._id}>
                 <h2> {post.title} </h2>
