@@ -13,6 +13,10 @@ li {
   border-bottom: 1px solid #999;
 }
 
+h1{
+  /* border: solid 1px #000; */
+  text-align: center;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -46,4 +50,8 @@ li {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
+}
+
+.imageDisplay img{
+  width: 30%;
 }

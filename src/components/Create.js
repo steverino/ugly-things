@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import axios from "axios";
+import UploadAndDisplayImage from "./UploadAndDisplayImage";
 
 const Create = () => {
-  const [title, setTitle] = useState("TITLE");
-  const [description, setDescription] = useState("DESCRIPTION");
-  const [images, setImages] = useState("IMAGES");
+  // const [title, setTitle] = useState("TITLE");
+  // const [description, setDescription] = useState("DESCRIPTION");
+  // const [images, setImages] = useState("IMAGES");
   const [posts, setPosts] = useState([]);
   
   
@@ -18,12 +19,13 @@ const Create = () => {
   }, []);
   
 
-  const postImage = () => {
+  const postImage = (imgUrl,title,description) => {
+    
     axios
     .post("https://api.vschool.io/sfalvo/thing", {
-      title: title,
-      description: description,
-      imgUrl: images,
+      title,
+      imgUrl,
+      description
     })
     .then((response) => {
       setPosts((prev)=> [...prev, response.data]);
@@ -44,33 +46,7 @@ const Create = () => {
 
   return (
     <>
-      <form className="form">
-        <div className="form-input">
-          <input
-            type="text"
-            name="title"
-            placeholder="Title"
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            type="text"
-            name="description"
-            placeholder="Description"
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <input
-            type="text"
-            name="image"
-            placeholder="Image"
-            onChange={(e) => setImages(e.target.value)}
-          />
-        </div>
-        <div className="form-button">
-          <button className="btn-submit" type="button" onClick={postImage}>
-            Submit
-          </button>
-        </div>
-      </form>
+      <UploadAndDisplayImage postImage={postImage}/>
       {/* {console.log(Array.isArray(posts))} */}
       <div className="container">
         <ul>
@@ -81,7 +57,7 @@ const Create = () => {
               <>
                 <li>
                   <p> {post.title} </p>
-                  <img src={post.imgUrl} alt="PIC" />
+                  <p className="imageDisplay"><img src={post.imgUrl} alt="PIC" /></p>
                   <p>{post.description}</p>
 
                   <div>
