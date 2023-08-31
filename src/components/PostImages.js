@@ -6,24 +6,23 @@ import Footer from "./Footer";
 export const UserContext = createContext();
 export const CopyYearCotext = createContext();
 
-const Create = () => {
+const PostImages = () => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState("logged In User");
-
   const [postId, setPostId] = useState("");
-  const [copyYear, setCopyYear] = useState("")
+  const [copyYear, setCopyYear] = useState("");
 
-const y = new Date()
+  const y = new Date();
 
-
-const getImage = () => {
-  axios.get("https://api.vschool.io/sfalvo/thing/").then((response) => {
-    setPosts(response.data);
-  });
-};
-useEffect(() => {
-  getImage();
-  setCopyYear(y.getFullYear()) //needs to be in useEffect or it re-renders
+  const getImage = () => {
+    axios.get("https://api.vschool.io/sfalvo/thing/").then((response) => {
+      setPosts(response.data);
+    });
+  };
+  useEffect(() => {
+    getImage();
+    setCopyYear(y.getFullYear()); //needs to be in useEffect or it re-renders
+    
   }, []);
 
   const postImage = (imgUrl, title, description) => {
@@ -56,30 +55,31 @@ useEffect(() => {
         <UploadAndDisplayImage postImage={postImage} />
       </UserContext.Provider>
       {/* {console.log(Array.isArray(posts))} */}
-      <div className="container">
+      <div className="image-container">
         <ul>
           {posts.map((post, index) => {
             // return <li key={index}> <h3>{post.title}</h3> <p>{post.imgUrl}</p> {post.description}</li>;
             // console.log(Array.isArray(posts));
-
+            
             return (
               <li key={post._id}>
-                <h2> {post.title} </h2>
-                <p className="imageDisplay">
-                  <img src={post.imgUrl} alt="PIC" />
-                </p>
-                <p>{post.description}</p>
+                  
+                  <h2> {post.title} </h2>
+                  <p className="imageDisplay">
+                    <img src={post.imgUrl} alt="PIC" />
+                  </p>
+                  <p>{post.description}</p>
 
-                <div>
-                  <button
-                    className="btn-submit"
-                    type="button"
-                    onClick={() => deletePost(post._id)}
-                  >
-                    DELETE
-                  </button>
-                </div>
-              </li>
+                  <div>
+                    <button
+                      className="btn-submit"
+                      type="button"
+                      onClick={() => deletePost(post._id)}
+                    >
+                      DELETE
+                    </button>
+                  </div>
+                </li>
             );
           })}
         </ul>
@@ -91,4 +91,4 @@ useEffect(() => {
   );
 };
 
-export default Create;
+export default PostImages;

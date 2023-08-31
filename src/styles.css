@@ -19,9 +19,19 @@ h1 {
 }
 
 .container {
+  /* border: #00f solid thin; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: #000 solid thin;
+  
+  
+}
+
+.image-container  {
+  /* border: #f00 solid thin; */
+  margin-top: 3rem;
+  text-align: center;
 
 }
 

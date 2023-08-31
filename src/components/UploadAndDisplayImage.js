@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext, useRef } from "react";
 import axios from "axios";
-import { UserContext } from "./Create";
+import { UserContext } from "./PostImages";
 
 
 const UploadAndDisplayImage = ({ postImage }) => {
@@ -98,10 +98,7 @@ const UploadAndDisplayImage = ({ postImage }) => {
           />
         </form>
       </div>
-      <div>
-        <img src="" alt="" />TEST
-        
-      </div>
+      
     </>
   );
 };

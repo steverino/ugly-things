@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CopyYearCotext } from "./Create";
+import { CopyYearCotext } from "./PostImages";
 
 const Footer = () => {
   let copyYear = useContext(CopyYearCotext);
