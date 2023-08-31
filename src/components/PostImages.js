@@ -54,9 +54,6 @@ const PostImages = () => {
 
   };
 
-  const deleteImage = (imageName) => {
-  }
-
   return (
     <>
       <div className="container">
@@ -82,7 +79,7 @@ const PostImages = () => {
                       DELETE
                     </button>
                   </div>
-                  <button className="btn-submit" type="button" onClick={() => deleteImage('pic.jpg')}>OTHER DELETE</button>
+                  {/* <button className="btn-submit" type="button" onClick={() => deleteImage('pic.jpg')}>OTHER DELETE</button> */}
                 </li>
               );
             })}
