@@ -57,10 +57,8 @@ const PostImages = () => {
       {/* {console.log(Array.isArray(posts))} */}
       <div className="image-container">
         <ul>
-          {posts.map((post, index) => {
-            // return <li key={index}> <h3>{post.title}</h3> <p>{post.imgUrl}</p> {post.description}</li>;
-            // console.log(Array.isArray(posts));
-            
+          {posts.map((post) => {
+                      
             return (
               <li key={post._id}>
                   

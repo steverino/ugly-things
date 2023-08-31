@@ -2,16 +2,11 @@ import React, { useState, createContext, useContext, useRef } from "react";
 import axios from "axios";
 import { UserContext } from "./PostImages";
 
-
 const UploadAndDisplayImage = ({ postImage }) => {
-  // console.log(postImage);
   const [selectedFile, setSelectedFile] = useState(null);
   const [title, setTitle] = useState("TITLE");
   const [description, setDescription] = useState("DESCRIPTION");
-  // const [imgUrl, setImgUrl] = useState("");
   const [imgName, setImgName] = useState("");
-  const [myObj, setMyObj] = useState({})
-
   const myUser = useContext(UserContext)
   
   const onFileUpload = () => {
@@ -28,7 +23,6 @@ const UploadAndDisplayImage = ({ postImage }) => {
   
   const makeFile = (imgName,title,description)=>{
     let imgUrl = `images/${imgName}`
-    
     postImage(imgUrl,title,description)
   }
   
@@ -45,7 +39,6 @@ const UploadAndDisplayImage = ({ postImage }) => {
         {myUser}
         <h1>Upload and Display Image</h1>
         
-
         {selectedFile && (
           <div>
             <div>{title}</div>
@@ -65,7 +58,6 @@ const UploadAndDisplayImage = ({ postImage }) => {
               }}>Remove</button>
           </div>
         )}
-
         <br />
         <br />
         <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -98,7 +90,6 @@ const UploadAndDisplayImage = ({ postImage }) => {
           />
         </form>
       </div>
-      
     </>
   );
 };
