@@ -8,7 +8,7 @@ export const CopyYearCotext = createContext();
 
 const Create = () => {
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState("Jesse Hall");
+  const [user, setUser] = useState("logged In User");
 
   const [postId, setPostId] = useState("");
   const [copyYear, setCopyYear] = useState("")
