@@ -38,7 +38,7 @@ fs.readdir('../public/images',(err,files)=>{
 })
 
 app.get('/uploads', function (req,res){
-console.log(req.params);
+console.log(`../public/images/${req.file}`);
   res.send('test')
 })
 
@@ -49,5 +49,18 @@ app.post("/api/uploadfile", upload.single('myFile'), (req, res, next) => {
 
   res.sendStatus(200);
 });
+
+app.delete(`/api/delete`,(req,res)=>{
+  res.send('delete')
+  
+  fs.unlink(`../public/images/pic.jpg`,(err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log('File deleted successfully');
+  });
+  
+} );
 
 app.listen(5000, () => console.log("Listening on port 5000"));

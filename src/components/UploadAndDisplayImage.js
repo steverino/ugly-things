@@ -1,13 +1,13 @@
-import React, { useState, createContext, useContext, useRef } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
-import { UserContext } from "./PostImages";
+
 
 const UploadAndDisplayImage = ({ postImage }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [title, setTitle] = useState("TITLE");
   const [description, setDescription] = useState("DESCRIPTION");
   const [imgName, setImgName] = useState("");
-  const myUser = useContext(UserContext)
+  
   
   const onFileUpload = () => {
     const formData = new FormData();
@@ -35,8 +35,8 @@ const UploadAndDisplayImage = ({ postImage }) => {
   const refImage=useRef(null)
   return (
     <>
-      <div>
-        {myUser}
+      
+        
         <h1>Upload and Display Image</h1>
         
         {selectedFile && (
@@ -50,17 +50,20 @@ const UploadAndDisplayImage = ({ postImage }) => {
             <div>{description}</div>
             <br />
             <button onClick={() => {
-              setSelectedFile(null)
-              refTitle.current.value = '';
-              refDesc.current.value = ''
-              refImage.current.value = ''
+              setSelectedFile(null) //Removes image
+              refTitle.current.value = ''; //removes text field
+              refDesc.current.value = '' ;//removes text field
+              refImage.current.value = '' ;//removes text field
               
               }}>Remove</button>
           </div>
         )}
         <br />
         <br />
+        <div className="upload-container">
+        <div className="upload-form">
         <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <label htmlFor="title">Title</label>
           <input
             type="text"
             name="title"
@@ -78,9 +81,7 @@ const UploadAndDisplayImage = ({ postImage }) => {
             }}
             ref={refImage}
           />
-          <button type="button" onClick={onFileUpload}>
-            Upload Image
-          </button>
+          <label htmlFor="description">Description</label>
           <input
             type="text"
             name="description"
@@ -88,8 +89,12 @@ const UploadAndDisplayImage = ({ postImage }) => {
             onChange={(e) => setDescription(e.target.value)}
             ref={refDesc}
           />
+          <button type="button" onClick={onFileUpload}>
+            Upload Image
+          </button>
         </form>
-      </div>
+        </div>
+        </div>
     </>
   );
 };

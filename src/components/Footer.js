@@ -10,14 +10,16 @@ const Footer = () => {
 
   return (
     <>
-      <div>Copyright {copyYear} &copy; </div>
       <section className="footer">
-        <ul>
-          <li>link1</li>
-          <li>link2</li>
-          <li>link3</li>
-          <li>link4</li>
-        </ul>
+        <div>Copyright {copyYear} &copy; </div>
+        <div className="footer-links">
+          <ul>
+            <li>link1</li>
+            <li>link2</li>
+            <li>link3</li>
+            <li>link4</li>
+          </ul>
+        </div>
       </section>
     </>
   );

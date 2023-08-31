@@ -2,13 +2,14 @@ import React, { useState, useEffect, createContext, useContext } from "react";
 import axios from "axios";
 import UploadAndDisplayImage from "./UploadAndDisplayImage";
 import Footer from "./Footer";
+import Header from "./Header";
 
-export const UserContext = createContext();
+
 export const CopyYearCotext = createContext();
 
 const PostImages = () => {
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState("logged In User");
+  
   const [postId, setPostId] = useState("");
   const [copyYear, setCopyYear] = useState("");
 
@@ -22,7 +23,6 @@ const PostImages = () => {
   useEffect(() => {
     getImage();
     setCopyYear(y.getFullYear()); //needs to be in useEffect or it re-renders
-    
   }, []);
 
   const postImage = (imgUrl, title, description) => {
@@ -38,30 +38,35 @@ const PostImages = () => {
       .catch((error) => console.log(error));
   };
 
-  const deletePost = (id) => {
+  const deletePost = (id,imageName) => {
     axios
       .delete(`https://api.vschool.io/sfalvo/thing/${id}`)
       .then((response) => {
+        
         posts.filter((post) => {
           setPosts((prev) => [...prev, post.id !== id]);
           getImage();
         });
       });
+
+      axios.delete(`http://localhost:5000/api/delete`, imageName)
+      console.log(imageName);
+
   };
+
+  const deleteImage = (imageName) => {
+  }
 
   return (
     <>
-      <UserContext.Provider value={user}>
-        <UploadAndDisplayImage postImage={postImage} />
-      </UserContext.Provider>
-      {/* {console.log(Array.isArray(posts))} */}
-      <div className="image-container">
-        <ul>
-          {posts.map((post) => {
-                      
-            return (
-              <li key={post._id}>
-                  
+      <div className="container">
+      
+          <UploadAndDisplayImage postImage={postImage} />
+        <div className="image-container">
+          <ul>
+            {posts.map((post) => {
+              return (
+                <li key={post._id}>
                   <h2> {post.title} </h2>
                   <p className="imageDisplay">
                     <img src={post.imgUrl} alt="PIC" />
@@ -77,10 +82,12 @@ const PostImages = () => {
                       DELETE
                     </button>
                   </div>
+                  <button className="btn-submit" type="button" onClick={() => deleteImage('pic.jpg')}>OTHER DELETE</button>
                 </li>
-            );
-          })}
-        </ul>
+              );
+            })}
+          </ul>
+        </div>
       </div>
       <CopyYearCotext.Provider value={copyYear}>
         <Footer />
