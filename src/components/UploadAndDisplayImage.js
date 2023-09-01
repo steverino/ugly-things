@@ -10,15 +10,21 @@ const UploadAndDisplayImage = ({ postImage }) => {
   
   
   const onFileUpload = () => {
-    const formData = new FormData();
-    formData.append("myFile", selectedFile);
-    
-    axios.post("http://localhost:5000/api/uploadfile", formData, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    makeFile(imgName,title,description);
+
+    if(selectedFile === null){
+      return
+    }else{
+      
+      const formData = new FormData();
+      formData.append("myFile", selectedFile);
+      
+      axios.post("http://localhost:5000/api/uploadfile", formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      makeFile(imgName,title,description);
+    }
   };
   
   const makeFile = (imgName,title,description)=>{

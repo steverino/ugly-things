@@ -1,20 +1,15 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import UploadAndDisplayImage from "./UploadAndDisplayImage";
 import Footer from "./Footer";
-import Header from "./Header";
-
 
 export const CopyYearCotext = createContext();
 
 const PostImages = () => {
   const [posts, setPosts] = useState([]);
-  
-  const [postId, setPostId] = useState("");
   const [copyYear, setCopyYear] = useState("");
 
-  const y = new Date();
-
+  
   const getImage = () => {
     axios.get("https://api.vschool.io/sfalvo/thing/").then((response) => {
       setPosts(response.data);
@@ -22,7 +17,8 @@ const PostImages = () => {
   };
   useEffect(() => {
     getImage();
-    setCopyYear(y.getFullYear()); //needs to be in useEffect or it re-renders
+    
+    setCopyYear(new Date().getFullYear()); //needs to be in useEffect or it re-renders
   }, []);
 
   const postImage = (imgUrl, title, description) => {
@@ -44,9 +40,9 @@ const PostImages = () => {
       .then((response) => {
         
         posts.filter((post) => {
-          setPosts((prev) => [...prev, post.id !== id]);
-          getImage();
+          return setPosts((prev) => [...prev, post.id !== id]);
         });
+        getImage();
       });
 
       axios.delete(`http://localhost:5000/api/delete/`,{data: {imageName}})
