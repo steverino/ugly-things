@@ -8,42 +8,128 @@ ul {
   list-style: none;
 }
 
-li {
+.image-container li {
   margin: 0.5rem;
   border-bottom: 1px solid #999;
+}
+
+h1 {
+  /* border: solid 1px #000; */
+  text-align: center;
+}
+
+.wrapper {
+  /* border: #00f solid thin; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: #000 solid thin; */
+
+
 }
 
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  
+}
+
+.image-container {
+  /* border: #f00 solid thin; */
+  display: flex;
+  margin-top: 3rem;
+  text-align: center;
+
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   
+}
+
+.upload-form {
+  /* width: 20%; */
+  padding: 1rem;
+  border: #000 2px;
+  border-radius: 5px;
+  border-style: inset;
+  background-color: #ccc;
+}
+
+.upload-form form {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.upload-form input {
+  margin: 1rem 0;
 }
 
 .btn-submit {
   margin-bottom: 1rem;
 }
 
-.header{
-    text-align: center;
-    border: 1px solid #000;
-    height: 2rem;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 100%;
+  height: 10rem;
+  background-color: chocolate;
+  color:greenyellow;
+  font-size: 6rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: italic;
 }
 
 .form {
-    display: flex;
-    
-    flex-direction: column;
+  display: flex;
+
+  flex-direction: column;
 }
 
-.form-input{
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-around;
+.form-input {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
 }
 
 .form-button {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.imageDisplay img {
+  width: 30%;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.footer ul {
+  width: 100%;
+  /* border: #000 thin solid; */
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.footer li {
+  display: flex;
+  
+}
+
+.footer-links {
+  width: 50%;
 }
