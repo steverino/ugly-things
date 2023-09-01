@@ -38,7 +38,7 @@ fs.readdir('../public/images',(err,files)=>{
 })
 
 app.get('/uploads', function (req,res){
-console.log(`../public/images/${req.file}`);
+// console.log(`../public/images/${req.file}`);
   res.send('test')
 })
 
@@ -50,10 +50,10 @@ app.post("/api/uploadfile", upload.single('myFile'), (req, res, next) => {
   res.sendStatus(200);
 });
 
-app.delete(`/api/delete`,(req,res)=>{
-  res.send('delete')
+app.delete(`/api/delete/`,(req)=>{//req is being sent from axios delete {data:{imageName}}
+  console.log(req.body.imageName);
   
-  fs.unlink(`../public/images/pic.jpg`,(err) => {
+  fs.unlink(`../public/${req.body.imageName}`,(err) => {
     if (err) {
       console.error(err);
       return;

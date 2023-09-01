@@ -49,7 +49,7 @@ const PostImages = () => {
         });
       });
 
-      axios.delete(`http://localhost:5000/api/delete`, imageName)
+      axios.delete(`http://localhost:5000/api/delete/`,{data: {imageName}})
       console.log(imageName);
 
   };
@@ -74,7 +74,7 @@ const PostImages = () => {
                     <button
                       className="btn-submit"
                       type="button"
-                      onClick={() => deletePost(post._id)}
+                      onClick={() => deletePost(post._id,post.imgUrl)}
                     >
                       DELETE
                     </button>
