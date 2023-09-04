@@ -5,11 +5,12 @@ import Footer from "./Footer";
 
 export const CopyYearCotext = createContext();
 
+export const PostImageContext = createContext();
+
 const PostImages = () => {
   const [posts, setPosts] = useState([]);
   const [copyYear, setCopyYear] = useState("");
 
-  
   const getImage = () => {
     axios.get("https://api.vschool.io/sfalvo/thing/").then((response) => {
       setPosts(response.data);
@@ -17,7 +18,7 @@ const PostImages = () => {
   };
   useEffect(() => {
     getImage();
-    
+
     setCopyYear(new Date().getFullYear()); //needs to be in useEffect or it re-renders
   }, []);
 
@@ -34,31 +35,42 @@ const PostImages = () => {
       .catch((error) => console.log(error));
   };
 
-  const deletePost = (id,imageName) => {
+  const deletePost = (id, imageName) => {
     axios
       .delete(`https://api.vschool.io/sfalvo/thing/${id}`)
       .then((response) => {
-        
         posts.filter((post) => {
           return setPosts((prev) => [...prev, post.id !== id]);
         });
         getImage();
       });
 
-      axios.delete(`http://localhost:5000/api/delete/`,{data: {imageName}})
-      console.log(imageName);
-
+    axios.delete(`http://localhost:5000/api/delete/`, { data: { imageName } });
+    console.log(imageName);
   };
+
+  const editPost=(id,imgUrl,title,description)=>{
+    axios.put(`https://api.vschool.io/sfalvo/thing/${id}`,{
+      title:title,
+      imgUrl:imgUrl,
+      description:description
+    }).then((response)=>{
+      console.log(title);
+    })
+  }
 
   return (
     <>
       <div className="container">
-      
-          <UploadAndDisplayImage postImage={postImage} />
+        <PostImageContext.Provider value={postImage}>
+          <UploadAndDisplayImage />
+        </PostImageContext.Provider>
+
         <div className="image-container">
           <ul>
             {posts.map((post) => {
               return (
+                // DISPLAY IMAGE
                 <li key={post._id}>
                   <h2> {post.title} </h2>
                   <p className="imageDisplay">
@@ -67,15 +79,25 @@ const PostImages = () => {
                   <p>{post.description}</p>
 
                   <div>
+                    {/* DELETE IMAGE */}
                     <button
                       className="btn-submit"
                       type="button"
-                      onClick={() => deletePost(post._id,post.imgUrl)}
+                      onClick={() => deletePost(post._id, post.imgUrl)}
                     >
                       DELETE
                     </button>
+                    
+                    {/* EDIT IMAGE  */}
+                    <button
+                      className="btn-submit"
+                      type="button"
+                      onClick={() => editPost(post._id, post.imgUrl,post.title,post.description)}
+                    >
+                      Edit
+                    </button>
                   </div>
-                  {/* <button className="btn-submit" type="button" onClick={() => deleteImage('pic.jpg')}>OTHER DELETE</button> */}
+                  
                 </li>
               );
             })}
