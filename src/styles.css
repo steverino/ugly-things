@@ -20,6 +20,10 @@ h1 {
   text-align: center;
 }
 
+/* [contenteditable] {
+  outline: 0px solid #f00;
+} */
+
 .wrapper {
   /* border: #00f solid thin; */
   display: flex;
