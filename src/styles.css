@@ -6,11 +6,13 @@ body {
 
 ul {
   list-style: none;
+  padding: 0;
 }
 
 .image-container li {
   margin: 0.5rem;
   border-bottom: 1px solid #999;
+  
 }
 
 h1 {
@@ -39,6 +41,7 @@ h1 {
 .image-container {
   /* border: #f00 solid thin; */
   display: flex;
+  justify-content: center;
   margin-top: 3rem;
   text-align: center;
 
@@ -108,7 +111,7 @@ h1 {
 }
 
 .imageDisplay img {
-  width: 30%;
+  width: 300px;
 }
 
 .footer {
