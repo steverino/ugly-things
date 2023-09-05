@@ -98,7 +98,7 @@ const PostImages = () => {
                       Edit
                     </button> */}
                   </div>
-                  
+                  {posts && 'Click text to edit in place'}
                 </li>
               );
             })}

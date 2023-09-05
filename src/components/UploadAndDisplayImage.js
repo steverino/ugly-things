@@ -80,6 +80,7 @@ const UploadAndDisplayImage = () => {
             </button>
           </form>
         </div>
+        
       </div>
     </>
   );

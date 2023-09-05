@@ -1,4 +1,4 @@
-import React, {createContext, useState} from "react";
+import React, { createContext, useState } from "react";
 import Header from "./Header";
 import PostImages from "./PostImages";
 
@@ -9,10 +9,10 @@ const App = () => {
   return (
     <>
       <div className="wrapper">
-      <UserContext.Provider value={user}>
+        <UserContext.Provider value={user}>
           <Header />
         </UserContext.Provider>
-        
+
         <PostImages />
       </div>
     </>
