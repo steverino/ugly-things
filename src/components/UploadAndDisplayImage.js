@@ -12,7 +12,7 @@ const UploadAndDisplayImage = ({ postImage }) => {
   const onFileUpload = () => {
 
     if(selectedFile === null){
-      return
+      return alert("No Image Selected")
     }else{
       
       const formData = new FormData();
