@@ -55,7 +55,7 @@ const PostImages = () => {
     axios.put(`https://api.vschool.io/sfalvo/thing/${id}`,item )
       .then((response)=>{ // should response be used?
         // setPosts((prev)=> [...prev, response.data])
-       
+      
       // console.log(response.data.title);
       
       
