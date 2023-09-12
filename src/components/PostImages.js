@@ -21,7 +21,7 @@ const PostImages = () => {
   };
   useEffect(() => {
     getImage();
-
+    
     setCopyYear(new Date().getFullYear()); //needs to be in useEffect or it re-renders
   }, []);
 
@@ -49,24 +49,17 @@ const PostImages = () => {
       });
 
     axios.delete(`http://localhost:5000/api/delete/`, { data: { imageName } });
-    console.log(imageName);
+    
   };
 
-  const editPost=(id,title,imgUrl,description)=>{
+  const editPost=(id,imgUrl,title,description)=>{
     axios.put(`https://api.vschool.io/sfalvo/thing/${id}`,{
       title:title,
       imgUrl:imgUrl,
       description:description
     }).then((response)=>{
-      // response.data.title = title;
+      console.log(title);
     })
-    // handleClick(imgUrl)
-  }
-
-  const handleClick= (imgLoc,imgUrl, title, description)=>{
-    setShowPreview(current=>!current)
-    setImgLoc(imgLoc)
-    console.log(imgLoc);
   }
 
   return (
@@ -83,11 +76,11 @@ const PostImages = () => {
               return (
                 // DISPLAY IMAGE
                 <li key={post._id}>
-                  <h2 contentEditable={true} onInput={(e)=>editPost(post._id, e.currentTarget.textContent,post.imgUrl,post.description)} >{post.title}</h2>
+                  <h2> {post.title} </h2>
                   <p className="imageDisplay">
                     <img src={post.imgUrl} alt="PIC" />
                   </p>
-                  <p contentEditable={true} onInput={(e)=>editPost(post._id,post.title,post.imgUrl, e.currentTarget.textContent)}>{post.description}</p>
+                  <p>{post.description}</p>
 
                   <div>
                     {/* DELETE IMAGE */}
@@ -109,7 +102,7 @@ const PostImages = () => {
                       Edit
                     </button> */}
                   </div>
-                  
+                  {posts && 'Click text to edit in place'}
                 </li>
               );
             })}

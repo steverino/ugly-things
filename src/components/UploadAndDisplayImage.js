@@ -11,7 +11,7 @@ const UploadAndDisplayImage = () => {
   const [imgName, setImgName] = useState("");
 
   const postImage = useContext(PostImageContext);
-  
+console.log(postImage);
   const onFileUpload = () => {
     if (selectedFile === null) {
       return;
@@ -81,6 +81,7 @@ const UploadAndDisplayImage = () => {
             </button>
           </form>
         </div>
+        
       </div>
     </>
   );

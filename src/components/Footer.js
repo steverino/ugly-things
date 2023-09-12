@@ -14,10 +14,10 @@ const Footer = () => {
         <div>Copyright {copyYear} &copy; </div>
         <div className="footer-links">
           <ul>
-            <li>link1</li>
-            <li>link2</li>
-            <li>link3</li>
-            <li>link4</li>
+            <li><a href="#">link1</a></li>
+            <li><a href="#">link2</a></li>
+            <li><a href="#">link3</a></li>
+            <li><a href="#">link4</a></li>
           </ul>
         </div>
       </section>
