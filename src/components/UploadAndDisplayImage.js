@@ -11,7 +11,7 @@ const UploadAndDisplayImage = () => {
   const [imgName, setImgName] = useState("");
 
   const postImage = useContext(PostImageContext);
-console.log(postImage);
+  
   const onFileUpload = () => {
     if (selectedFile === null) {
       return;
@@ -45,6 +45,7 @@ console.log(postImage);
 
       {selectedFile && (
         <PreviewImage title={title} description={description} refTitle={refTitle} refDesc={refDesc} refImage={refImage} selectedFile={selectedFile} setSelectedFile={setSelectedFile}  />
+        
       )}
       <div className="upload-container">
         <div className="upload-form">

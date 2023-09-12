@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import UploadAndDisplayImage from "./UploadAndDisplayImage";
 import Footer from "./Footer";
+import PreviewImage from "./PreviewImage";
 
 export const CopyYearCotext = createContext();
 
@@ -10,6 +11,8 @@ export const PostImageContext = createContext();
 const PostImages = () => {
   const [posts, setPosts] = useState([]);
   const [copyYear, setCopyYear] = useState("");
+  const [showPreview, setShowPreview] = useState(false)
+  const [imgLoc, setImgLoc] = useState('')
 
   const getImage = () => {
     axios.get("https://api.vschool.io/sfalvo/thing/").then((response) => {
@@ -49,14 +52,21 @@ const PostImages = () => {
     console.log(imageName);
   };
 
-  const editPost=(id,imgUrl,title,description)=>{
+  const editPost=(id,title,imgUrl,description)=>{
     axios.put(`https://api.vschool.io/sfalvo/thing/${id}`,{
       title:title,
       imgUrl:imgUrl,
       description:description
     }).then((response)=>{
-      console.log(title);
+      // response.data.title = title;
     })
+    // handleClick(imgUrl)
+  }
+
+  const handleClick= (imgLoc,imgUrl, title, description)=>{
+    setShowPreview(current=>!current)
+    setImgLoc(imgLoc)
+    console.log(imgLoc);
   }
 
   return (
@@ -65,6 +75,7 @@ const PostImages = () => {
         <PostImageContext.Provider value={postImage}>
           <UploadAndDisplayImage />
         </PostImageContext.Provider>
+        {showPreview && <PreviewImage imgUrl={imgLoc} />}
 
         <div className="image-container">
           <ul>
@@ -72,11 +83,11 @@ const PostImages = () => {
               return (
                 // DISPLAY IMAGE
                 <li key={post._id}>
-                  <h2> {post.title} </h2>
+                  <h2 contentEditable={true} onInput={(e)=>editPost(post._id, e.currentTarget.textContent,post.imgUrl,post.description)} >{post.title}</h2>
                   <p className="imageDisplay">
                     <img src={post.imgUrl} alt="PIC" />
                   </p>
-                  <p>{post.description}</p>
+                  <p contentEditable={true} onInput={(e)=>editPost(post._id,post.title,post.imgUrl, e.currentTarget.textContent)}>{post.description}</p>
 
                   <div>
                     {/* DELETE IMAGE */}
@@ -89,13 +100,14 @@ const PostImages = () => {
                     </button>
                     
                     {/* EDIT IMAGE  */}
-                    <button
+                    {/* <button
                       className="btn-submit"
                       type="button"
-                      onClick={() => editPost(post._id, post.imgUrl,post.title,post.description)}
+                      onClick={() => editPost(post._id,post.title,post.description, post.imgUrl)}
+                      // onClick={ ()=>handleClick(post.imgUrl)}
                     >
                       Edit
-                    </button>
+                    </button> */}
                   </div>
                   
                 </li>
